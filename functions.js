@@ -1,49 +1,61 @@
-/* 
-Output: 
+/* eslint-disable keyword-spacing */
+/* eslint-disable quotes */
+/*
+Output:
 ['Hello Suzie Summerson!', 'Hello Cacilia Caramuscia', 'Hello Mattie Mungane' etc]
 */
 
 export function greetUsers(customers) {
-     // just map over them to make a greeting
-    return true;
+  const greeting = customers.map((customer) => {
+    `Hello ${customer.first_name} ${customer.last_name}!`;
+  });
+  return greeting;
+  // just map over them to make a greeting
 }
 
-/* 
-Output: 
+/*
+Output:
 ['Hello Suzie Summerson!', 'Hello Cacilia Caramuscia', etc]
 */
 
 export function greetUsersOverAge60(customers) {
-    return customers
-        // first, filter over the user to get the ones over 60
-        // then map over them to make a greeting
+  const oldPeople = customers
+    .filter((customer) => customer.age > 60)
+    .map((customer) => `Hello ${customer.first_name} ${customer.last_name}!`);
+  return oldPeople;
+  // first, filter over the user to get the ones over 60
+  // then map over them to make a greeting
 }
 
-
-/* 
-Output: 
+/*
+Output:
 4532
 */
 
 export function addAllAges(customers) {
-    // reduce through the customers to make a sum
-    return true;
+  const sum = customers.reduce((acc, customer) => acc + customer.age, 0);
+  // reduce through the customers to make a sum
+  return sum;
 }
 
-/* 
-Output: 
+/*
+Output:
 4.5
 */
 
 export function getAverageCoolFactor(customers) {
-    // map through to make an array of cool factors
-    // then reduce through that array to get a sum
-    // then divide by the total number of customers
-    return true;
+  const coolPeople =
+    customers
+      .map((customer) => customer.cool_factor)
+      .reduce((acc, customer) => acc + customer.cool_factor, 0) / 45;
+  // map through to make an array of cool factors
+  // then reduce through that array to get a sum
+  // then divide by the total number of customers
+  return coolPeople;
 }
 
-/* 
-Output: 
+/*
+Output:
 {
     female: 42,
     male: 39,
@@ -53,11 +65,20 @@ Output:
 */
 
 export function getTotalOfEachGender(customers) {
-    return true;
+  return customers.reduce((acc, customer) => {
+    // eslint-disable-next-line keyword-spacing
+    if (acc[customer.gender]) {
+      acc[customer.gender]++;
+    } else {
+      acc[customer.gender] = 1;
+    }
+
+    return acc;
+  }, {});
 }
 
-/* 
-Output: 
+/*
+Output:
  {
     female: 3,
     male: 2,
@@ -67,11 +88,21 @@ Output:
 */
 
 export function getGenderBreakdownOfFordOwners(customers) {
-    return true;
+  return customers
+    .filter((customer) => customer.car_make === "Ford")
+    .reduce((acc, customer) => {
+      if (acc[customer.gender]) {
+        acc[customer.gender]++;
+      } else {
+        acc[customer.gender] = 1;
+      }
+
+      return acc;
+    }, {});
 }
 
-/* 
-Output: 
+/*
+Output:
 {
     ford: {
         female: 3,
@@ -88,11 +119,21 @@ Output:
 */
 
 export function getGenderBreakdownOfEachCar(customers) {
-    return true;
+  return customers
+    .filter((customer) => customer.car_make)
+    .reduce((acc, customer) => {
+      if (acc[customer.gender]) {
+        acc[customer.gender]++;
+      } else {
+        acc[customer.gender] = 1;
+      }
+
+      return acc;
+    }, {});
 }
 
-/* 
-Output: 
+/*
+Output:
 {
     ford: [3, 5, 4, 4, 7, 5],
     mercedes: [8, 5, 6, 8, 3, 9],
@@ -101,9 +142,18 @@ Output:
 }
 */
 
-
 export function getAllCoolFactorsOfEachCar(customers) {
-    return true;
+  const coolFactors = customers
+    .filter((customer) => customer.car_make)
+    .reduce((acc, customer) => {
+      if (acc[customer.car_make]) {
+        [customer.car_make].push(customer.cool_factor);
+      } else {
+        acc[customer.car_make].push([]);
+      }
+    });
+
+  return coolFactors;
 }
 
 /////////////////////////////// STRETCH GOALS ///////////////////////////////////////
@@ -112,9 +162,8 @@ export function getAllCoolFactorsOfEachCar(customers) {
 /////////////////////////////// STRETCH GOALS ///////////////////////////////////////
 /////////////////////////////// STRETCH GOALS ///////////////////////////////////////
 
-
-/* 
-Output: 
+/*
+Output:
 {
     ford: 5.4
     mercedes:  8.5
@@ -123,13 +172,12 @@ Output:
 */
 
 export function getAverageCoolFactorOfEachCar(customers) {
-    return true;
+  return true;
 }
 
-
-/* 
-Output: 
-// break the customers into age demographic blocks. 
+/*
+Output:
+// break the customers into age demographic blocks.
 // For example, this says there are 55 people between 10 and 19, 38 people between 20 and 29, etc
 {
     10: 55,
@@ -145,12 +193,12 @@ Output:
 */
 
 export function makeAgeBrackets(customers) {
-    return true;
+  return true;
 }
 
-/* 
-Output: 
-// break the customers into age blocks. 
+/*
+Output:
+// break the customers into age blocks.
 // For example, this lists out every cool factor for users aged between 1 and 10, then every cool factor for users aged between 21 and 30, etc
 {
     10: [3, 5, 4, 4, 7, 5],
@@ -162,13 +210,12 @@ Output:
 */
 
 export function getCoolFactorsByAgeBracket(customers) {
-    return true;
+  return true;
 }
 
-
-/* 
-Output: 
-// break the customers into age demographic blocks, and give the average cool factor for every age block. 
+/*
+Output:
+// break the customers into age demographic blocks, and give the average cool factor for every age block.
 // For example, below, the average cool factor for users aged between 31-40 is 9.5.
 
 {
@@ -181,6 +228,5 @@ Output:
 */
 
 export function getAverageCoolFactorByAgeBracket(customers) {
-    return true;
+  return true;
 }
-
