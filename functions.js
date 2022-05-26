@@ -6,9 +6,10 @@ Output:
 */
 
 export function greetUsers(customers) {
-  const greeting = customers.map((customer) => {
-    `Hello ${customer.first_name} ${customer.last_name}!`;
-  });
+  const greeting = customers.map(
+    (customer) => `Hello ${customer.first_name} ${customer.last_name}!`
+  );
+
   return greeting;
   // just map over them to make a greeting
 }
@@ -44,14 +45,15 @@ Output:
 */
 
 export function getAverageCoolFactor(customers) {
-  const coolPeople =
+  return (
     customers
       .map((customer) => customer.cool_factor)
-      .reduce((acc, customer) => acc + customer.cool_factor, 0) / 45;
+      .reduce((acc, cool_factor) => acc + cool_factor, 0) / customers.length
+  );
+
   // map through to make an array of cool factors
   // then reduce through that array to get a sum
   // then divide by the total number of customers
-  return coolPeople;
 }
 
 /*
@@ -143,17 +145,9 @@ Output:
 */
 
 export function getAllCoolFactorsOfEachCar(customers) {
-  const coolFactors = customers
-    .filter((customer) => customer.car_make)
-    .reduce((acc, customer) => {
-      if (acc[customer.car_make]) {
-        [customer.car_make].push(customer.cool_factor);
-      } else {
-        acc[customer.car_make].push([]);
-      }
-    });
-
-  return coolFactors;
+  return customers.reduce((acc, car_make) => {
+    if (acc[car_make]) {
+      acc[car_make] = [];
 }
 
 /////////////////////////////// STRETCH GOALS ///////////////////////////////////////
